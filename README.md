@@ -2,54 +2,54 @@
 
 An AI system that reads incoming customer support messages, predicts which team should handle them (billing, account, product, or service), predicts how urgent they are (high, medium, low), and automatically routes them — or flags them for a human to review when the model isn't confident enough.
 
-## What it does
+## *What it does*
 
 Companies receive large volumes of support tickets[emails] that normally have to be sorted by hand. This project automates that first step:
 
-A customer message is typed into a simple web page.
-The model predicts a category and a confidence score.
-A second model predicts the ticket's urgency.
-If the model's confidence is below 60%, the ticket is marked "NEEDS HUMAN REVIEW" and logged to a file for a human to check later, instead of being auto-routed.
+- A customer message is typed into a simple web page.
+- The model predicts a category and a confidence score.
+- A second model predicts the ticket's urgency.
+- If the model's confidence is below 60%, the ticket is marked "NEEDS HUMAN REVIEW" and logged to a file for a human to check later, instead of being auto-routed.
 
 ## Project structure
 
- ├── download_data.py          --> Downloads the raw dataset from Hugging Face
- ├── inspect_data.py           --> One-off script used to inspect the raw data's columns/categories
- ├── map_labels.py             --> Maps 11 raw categories -> 4 target labels (billing/account/product/service)
- ├── make_urgency.py           --> Creates urgency labels (high/medium/low) using rule-based mapping
- │
- ├── tfidf_step.py             --> Practice run: text -> TF-IDF features
- ├── train_model.py            --> Practice run: trains + evaluates the category model
- ├── train_urgency.py          --> Trains + evaluates the urgency model, saves the final urgency model
- ├── save_model.py             --> Trains the FINAL category model on all data and saves it
- ├── confusion_matrix.py       --> Builds the confusion matrix (table + chart) for the category model
- │
- ├── predict.py                --> Core logic: loads saved models, makes predictions, applies rules, logs flagged tickets
- ├── app.py                    --> Streamlit web app (the user-facing product)
- │
- ├── support_tickets_raw.csv         --> Original downloaded dataset (26,872 rows)
- ├── support_tickets_clean.csv       --> Cleaned dataset: text + category label
- ├── support_tickets_urgency.csv     --> Cleaned dataset: text + urgency label
- ├── flagged_tickets.csv             --> Auto-generated log of low-confidence tickets (grows as the app is used)
- │
- ├── vectorizer.joblib          --> Saved TF-IDF vectorizer
- ├── model.joblib               --> Saved category classifier
- ├── urgency_model.joblib       --> Saved urgency classifier
- │
- └── confusion_matrix.png       --> Saved confusion matrix chart
+ - ├── download_data.py          --> Downloads the raw dataset from Hugging Face
+ - ├── inspect_data.py           --> One-off script used to inspect the raw data's columns/categories
+ - ├── map_labels.py             --> Maps 11 raw categories -> 4 target labels (billing/account/product/service)
+ - ├── make_urgency.py           --> Creates urgency labels (high/medium/low) using rule-based mapping
+ - │
+ - ├── tfidf_step.py             --> Practice run: text -> TF-IDF features
+ - ├── train_model.py            --> Practice run: trains + evaluates the category model
+ - ├── train_urgency.py          --> Trains + evaluates the urgency model, saves the final urgency model
+ - ├── save_model.py             --> Trains the FINAL category model on all data and saves it
+ - ├── confusion_matrix.py       --> Builds the confusion matrix (table + chart) for the category model
+ - │
+ - ├── predict.py                --> Core logic: loads saved models, makes predictions, applies rules, logs flagged tickets
+ - ├── app.py                    --> Streamlit web app (the user-facing product)
+ - │
+ - ├── support_tickets_raw.csv         --> Original downloaded dataset (26,872 rows)
+ - ├── support_tickets_clean.csv       --> Cleaned dataset: text + category label
+ - ├── support_tickets_urgency.csv     --> Cleaned dataset: text + urgency label
+ - ├── flagged_tickets.csv             --> Auto-generated log of low-confidence tickets (grows as the app is used)
+ - │
+ - ├── vectorizer.joblib          --> Saved TF-IDF vectorizer
+ - ├── model.joblib               --> Saved category classifier
+ - ├── urgency_model.joblib       --> Saved urgency classifier
+ - │
+ - └── confusion_matrix.png       --> Saved confusion matrix chart
 
 ## How to run it
 
-Install the required libraries:
-      pip install pandas scikit-learn streamlit matplotlib datasets joblib
-    python download_data.py
-    python map_labels.py
-    python make_urgency.py
-    python save_model.py
-    python train_urgency.py
-Launch the app:
-      python -m streamlit run app.py
-   Open the local URL shown in the terminal, type a customer message, and click Analyze ticket.
+1. Install the required libraries:
+   - pip install pandas scikit-learn streamlit matplotlib datasets joblib
+    - python download_data.py
+    - python map_labels.py
+    - python make_urgency.py
+    - python save_model.py
+    - python train_urgency.py
+2. Launch the app:
+   - python -m streamlit run app.py
+   - Open the local URL shown in the terminal, type a customer message, and click Analyze ticket.
 
 ## Approach
 
@@ -74,10 +74,10 @@ This is a learning project, and the results should be read with that in mind:
 
 ## Possible next steps
 
-Tune the confidence threshold against a labeled validation set instead of a fixed guess.
-Replace TF-IDF with sentence embeddings for potentially better generalization to real-world phrasing.
-Find or collect a genuinely IT/helpdesk-style dataset to properly support a "technical" category.
-Build a small dashboard to view flagged_tickets.csv instead of reading the raw file.
+- Tune the confidence threshold against a labeled validation set instead of a fixed guess.
+- Replace TF-IDF with sentence embeddings for potentially better generalization to real-world phrasing.
+- Find or collect a genuinely IT/helpdesk-style dataset to properly support a "technical" category.
+- Build a small dashboard to view flagged_tickets.csv instead of reading the raw file.
 
 ## What I Learnt and the Challenges that I faced while making this AI-Model
 

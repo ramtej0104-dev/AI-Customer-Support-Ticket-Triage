@@ -2,7 +2,7 @@
 
 An AI system that reads incoming customer support messages, predicts which team should handle them (billing, account, product, or service), predicts how urgent they are (high, medium, low), and automatically routes them — or flags them for a human to review when the model isn't confident enough.
 
-## *What it does*
+## *What it does* 📠
 
 Companies receive large volumes of support tickets[emails] that normally have to be sorted by hand. This project automates that first step:
 
@@ -11,7 +11,7 @@ Companies receive large volumes of support tickets[emails] that normally have to
 - A second model predicts the ticket's urgency.
 - If the model's confidence is below 60%, the ticket is marked "NEEDS HUMAN REVIEW" and logged to a file for a human to check later, instead of being auto-routed.
 
-## *Project structure*
+## *Project structure* 🧬
 
  - ├── download_data.py          --> Downloads the raw dataset from Hugging Face
  - ├── inspect_data.py           --> One-off script used to inspect the raw data's columns/categories
@@ -38,7 +38,7 @@ Companies receive large volumes of support tickets[emails] that normally have to
  - │
  - └── confusion_matrix.png       --> Saved confusion matrix chart
 
-## *How to run it*
+## *How to run it* 🏃🏼‍♀️
 
 1. Install the required libraries:
    - pip install pandas scikit-learn streamlit matplotlib datasets joblib
@@ -51,7 +51,7 @@ Companies receive large volumes of support tickets[emails] that normally have to
    - python -m streamlit run app.py
    - Open the local URL shown in the terminal, type a customer message, and click Analyze ticket.
 
-## *Approach*
+## *Approach* 🪢
 
  Following the project's suggested steps:
 
@@ -62,7 +62,7 @@ Companies receive large volumes of support tickets[emails] that normally have to
 --> Evaluation : Precision, recall, F1-score (via classification_report) and a confusion matrix for the category model.
 --> Deployment : A Streamlit web app (app.py) exposes the model. Tickets with prediction confidence below 60% are flagged and logged to flagged_tickets.csv for                    human review.
 
-## *Honest limitations*
+## *Honest limitations* 😥
 
 This is a learning project, and the results should be read with that in mind:
 
@@ -72,14 +72,14 @@ This is a learning project, and the results should be read with that in mind:
 --> The urgency model missed explicit urgency wording : Messages containing words like "urgent" or "immediately" were not reliably classified as high urgency by                the model alone, because such wording was rare in the training data. A manual keyword-override rule was added on top of the model's prediction to                 catch these cases.
 -->Confidence threshold trade-off : The 60% cut-off for flagging tickets is a judgment call. Lowering it sends more tickets to automatic routing (faster, but                   riskier); raising it sends more tickets to human review (safer, but slower). Different thresholds were not systematically tuned.
 
-## *Possible next steps*
+## *Possible next steps* 🪜
 
 - Tune the confidence threshold against a labeled validation set instead of a fixed guess.
 - Replace TF-IDF with sentence embeddings for potentially better generalization to real-world phrasing.
 - Find or collect a genuinely IT/helpdesk-style dataset to properly support a "technical" category.
 - Build a small dashboard to view flagged_tickets.csv instead of reading the raw file.
 
-## ** *What I Learnt and the Challenges that I faced while making this AI-Model* **
+## 🤣😫 **What I Learnt and the Challenges that I faced while making this AI-Model** 🤣😫
 
   Firstly, I found a real customer support dataset online instead of using fake data, since I wanted the project to reflect real messy text. I cleaned it and mapped its categories down to the ones the project needed. I used AI assistance to help write the code, but I made the actual decisions along the way — like how to map categories, how to handle urgency since the dataset had none, and where to set the confidence threshold. I ran everything myself and tested it with my own example messages to see how it behaved. Alone the way I faced some challenge the output showed 100% accuracy in predicting the score card ,it was suspicious at the start but my AI assist said that the data set was way too perfect. Later the app was crashing for execution of 'product' but the error was connectivity error ,I was so stupid to not turn on the internet 🤣 and I got confused whether to put code of predict.py in file or in folder. Then I got error while I was running app.py because I didn't know that streamlit would never run directly and my AI assistant taught me to run not directly but use a command to run it. Later when we ran it, the output was not showing the urgency level and had to write the separate code by adding the urgency level but, to run it I didn't stopped the app.py running in the vs code and I had to stop that running using ctrl + c and again run the urgency code. Again I had to replace whole code in predict.py because the model was missing 0.1% prediction and redo it because the model didn't recognise the urgent words. I had to replace app.py to show the urgency level in the output and, added the urgent words to make the AI model recognize the urgent words that the customer sends in the email in predict.py and lastly I with the help of my AI assistant completed the project by adding readme and file to the repository in git hub
 

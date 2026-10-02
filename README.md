@@ -1,4 +1,4 @@
-# * AI-Customer-Support-Ticket-Triage *
+# **AI-Customer-Support-Ticket-Triage**
 
 An AI system that reads incoming customer support messages, predicts which team should handle them (billing, account, product, or service), predicts how urgent they are (high, medium, low), and automatically routes them — or flags them for a human to review when the model isn't confident enough.
 
